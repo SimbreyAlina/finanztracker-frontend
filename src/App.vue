@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const entities = ref([])
+const entities = ref<unknown[]>([])
 
 onMounted(async () => {
   const res = await fetch('https://finanztracker-backend.onrender.com/transactions')
@@ -12,9 +12,8 @@ onMounted(async () => {
 <template>
   <div>
     <h2>Meine Einträge</h2>
-
     <ul>
-      <li v-for="entity in entities" :key="entity.id">{{ entity.amount }} €</li>
+      <li v-for="entity in entities as any[]" :key="entity.id">{{ entity.amount }} €</li>
     </ul>
   </div>
 </template>
