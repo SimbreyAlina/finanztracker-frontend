@@ -5,8 +5,8 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <div id="app-container">
     <nav class="navigation-bar">
-      <RouterLink to="/" class="nav-link">🏠 Home</RouterLink>
-      <RouterLink to="/transactions" class="nav-link">📊 Einnahmen & Ausgaben</RouterLink>
+      <RouterLink to="/" class="nav-link">Home</RouterLink>
+      <RouterLink to="/transactions" class="nav-link">Einnahmen & Ausgaben</RouterLink>
     </nav>
 
     <main class="content-area">
@@ -45,7 +45,6 @@ import { RouterLink, RouterView } from 'vue-router'
   background-color: #34495e;
   color: white;
 }
-/* Style für den Button der Seite, auf der man sich gerade befindet */
 .router-link-active {
   background-color: #3498db !important;
   color: white;

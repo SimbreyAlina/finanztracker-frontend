@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import TransactionsView from '../views/TransactionsView.vue' // <-- Neu importieren
+import TransactionsView from '../views/TransactionsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,9 +11,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/transactions', // <-- Unter dieser URL erreichbar
+      path: '/transactions',
       name: 'transactions',
-      component: TransactionsView, // <-- Verweist auf deine neue Datei
+      component: TransactionsView,
     },
   ],
 })
