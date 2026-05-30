@@ -33,17 +33,19 @@ html, body, #app {
 #app-container {
   width: 100%;
   box-sizing: border-box;
-  padding: 3rem 2rem;
+  padding: 3rem 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #ffffff;
 }
 
 .main-app-title {
   color: #000000 !important;
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-top: 0;
   margin-bottom: 2rem;
-  font-weight: 800;
+  font-weight: 300;
+  font-family: 'Georgia', 'Playfair Display', serif;
+  font-style: italic;
   text-align: center;
 }
 
@@ -53,10 +55,12 @@ html, body, #app {
   justify-content: center;
   gap: 15px;
   background-color: #2c3e50;
-  padding: 12px;
-  border-radius: 8px;
-  max-width: 500px;
-  margin: 0 auto 2.5rem auto; /* Zentriert die Bar selbst */
+  padding: 15px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 2.5rem 0;
+  border-radius: 0;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
@@ -85,6 +89,8 @@ html, body, #app {
   width: 100%;
   display: flex;
   justify-content: center;
+  padding: 0 2rem; 
+  box-sizing: border-box;
 }
 </style>
 
@@ -98,7 +104,7 @@ html, body, #app {
   color: white;
 }
 
-/* Der Inhaltsbereich verliert sein Grau und wird auch komplett weiß */
+
 .content-area {
   background-color: #ffffff; /* Weiß statt vorher grau */
   padding: 24px;
