@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-
 interface Transaction {
   id: string | null
   amount: number
@@ -27,9 +26,6 @@ onMounted(() => {
 
 <template>
   <div class="page-container">
-    <h2 class="main-title">Willkommen beim FinanzTracker</h2>
-    <p class="subtitle">Nutze die Navigation, um deine Finanzen zu verwalten.</p>
-
     <section class="list-section">
       <h3 class="section-title">Deine Transaktionen</h3>
 
@@ -50,24 +46,16 @@ onMounted(() => {
 
 <style scoped>
 .page-container {
-  padding: 1rem;
+  padding: 0;
   background: white;
   border-radius: 8px;
-}
-.main-title {
-  color: #000000; /* Garantiert Schwarz */
-  margin-top: 0;
-}
-.subtitle {
-  color: #555555;
-  margin-bottom: 2rem;
 }
 .section-title {
   color: #000000; /* Garantiert Schwarz */
   border-bottom: 2px solid #ecf0f1;
   padding-bottom: 0.5rem;
   margin-top: 0;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 .transaction-list {
   list-style: none;
@@ -77,12 +65,13 @@ onMounted(() => {
 .transaction-item {
   display: flex;
   justify-content: space-between;
-  padding: 0.8rem;
+  padding: 1rem;
   border-bottom: 1px solid #f1f2f6;
   border-left: 5px solid #ccc;
   margin-bottom: 0.5rem;
   background-color: #fafafa;
   border-radius: 0 4px 4px 0;
+  font-size: 1.1rem;
 }
 .transaction-item.revenue {
   border-left-color: #2ecc71;
