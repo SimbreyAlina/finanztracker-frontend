@@ -89,7 +89,7 @@ html, body, #app {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 0 2rem; 
+  padding: 0 2rem;
   box-sizing: border-box;
 }
 </style>
