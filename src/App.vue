@@ -19,7 +19,9 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <style>
 
-html, body, #app {
+html,
+body,
+#app {
   background-color: #ffffff !important;
   color: #000000 !important;
   margin: 0 !important;
@@ -37,6 +39,7 @@ html, body, #app {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #ffffff;
 }
+
 
 .main-app-title {
   color: #000000 !important;
@@ -61,7 +64,7 @@ html, body, #app {
   box-sizing: border-box;
   margin: 0 0 2.5rem 0;
   border-radius: 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .nav-link {
@@ -83,32 +86,12 @@ html, body, #app {
   color: white;
 }
 
-
 .content-area {
   background-color: #ffffff;
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 0 2rem;
-  box-sizing: border-box;
-}
-</style>
-
-.nav-link:hover {
-  background-color: #34495e;
-  color: white;
-}
-
-.router-link-active {
-  background-color: #3498db !important;
-  color: white;
-}
-
-
-.content-area {
-  background-color: #ffffff; /* Weiß statt vorher grau */
-  padding: 24px;
-  width: 100%;
   box-sizing: border-box;
 }
 </style>
