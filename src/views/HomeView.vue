@@ -46,43 +46,41 @@ onMounted(() => {
 
 <style scoped>
 .page-container {
-  padding: 0;
-  background: white;
-  display: flex;
-  justify-content: center; /* Zentriert die Liste horizontal auf dem Bildschirm */
   width: 100%;
+  max-width: 600px;
+  background: #ffffff;
 }
 
-/* Sorgt dafür, dass die Liste auf PCs nicht unendlich lang gezogen wird, sondern kompakt mittig bleibt */
 .list-section {
   width: 100%;
-  max-width: 600px; /* Optimale Breite für eine mittige Liste */
 }
 
 .section-title {
-  color: #000000;
-  border-bottom: 2px solid #ecf0f1;
-  padding-bottom: 0.5rem;
+  color: #000000 !important;
+  border-bottom: 2px solid #f1f2f6;
+  padding-bottom: 0.8rem;
   margin-top: 0;
-  font-size: 1.5rem;
-  text-align: center; /* Zentriert die Überschrift der Liste */
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  text-align: center;
 }
 
 .transaction-list {
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0 0;
+  margin: 0;
 }
 
 .transaction-item {
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  align-items: center;
+  padding: 1.2rem;
   border-bottom: 1px solid #f1f2f6;
   border-left: 5px solid #ccc;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   background-color: #fafafa;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 6px 6px 0;
   font-size: 1.1rem;
 }
 
