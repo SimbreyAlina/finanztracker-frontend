@@ -18,6 +18,14 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style>
+/* Zwingt den gesamten Browser-Hintergrund dazu, reinweiß zu sein */
+html,
+body {
+  background-color: #ffffff !important;
+  margin: 0;
+  padding: 0;
+}
+
 #app-container {
   width: 100%;
   max-width: 100%;
@@ -25,8 +33,10 @@ import { RouterLink, RouterView } from 'vue-router'
   padding: 2rem;
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
 }
 
+/* Die Überschrift wird hier mittig oben zentriert */
 .main-app-title {
   color: #000000;
   font-size: 2.5rem;
@@ -34,10 +44,12 @@ import { RouterLink, RouterView } from 'vue-router'
   margin-bottom: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.5px;
+  text-align: center; /* Zentrierung */
 }
 
 .navigation-bar {
   display: flex;
+  justify-content: center; /* Zentriert auch die Navigationsknöpfe */
   gap: 15px;
   background-color: #2c3e50;
   padding: 15px;
@@ -67,11 +79,10 @@ import { RouterLink, RouterView } from 'vue-router'
   color: white;
 }
 
+/* Der Inhaltsbereich verliert sein Grau und wird auch komplett weiß */
 .content-area {
-  background-color: #f8f9fa;
+  background-color: #ffffff; /* Weiß statt vorher grau */
   padding: 24px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   width: 100%;
   box-sizing: border-box;
 }
