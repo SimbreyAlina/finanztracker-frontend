@@ -4,13 +4,39 @@ import { ref } from 'vue'
 const newAmount = ref<number | null>(null)
 const newType = ref<string>('revenue')
 
-const addTransaction = () => {
+const addTransaction = async () => {
   if (newAmount.value === null || newAmount.value <= 0) return
 
+  let finalAmount = newAmount.value
+  if (newType.value === 'expense') {
+    finalAmount = -Math.abs(newAmount.value)
+  }
 
-  alert('Eintrag erfasst! (Schau auf der Home-Seite für die Übersicht).')
+  try {
+    const response = await fetch('https://finanztracker-backend.onrender.com/transactions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        amount: finalAmount,
+        date: new Date().toISOString().split('T')[0]
+      })
+    })
 
-  newAmount.value = null
+    if (response.ok) {
+
+      alert('Eintrag erfolgreich in der PostgreSQL-Datenbank gespeichert!')
+
+      newAmount.value = null
+      newType.value = 'revenue'
+    } else {
+      alert('Das Backend hat geantwortet, aber das Speichern schlug fehl (Status: ' + response.status + ').')
+    }
+  } catch (error) {
+    console.error('Netzwerkfehler:', error)
+    alert('Verbindung zum Backend fehlgeschlagen. Läuft dein Render-Server?')
+  }
 }
 </script>
 
@@ -51,7 +77,7 @@ const addTransaction = () => {
   border-radius: 8px;
 }
 .section-title {
-  color: #000000; /* Garantiert Schwarz */
+  color: #000000;
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-size: 1.3rem;
