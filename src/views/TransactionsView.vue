@@ -1,8 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const newAmount = ref<number | null>(null)
 const newType = ref<string>('revenue')
+const newCategory = ref<string>('Sonstiges')
+
+// Dynamische Kategorien je nach Typ
+const incomeCategories = ['Job', 'Nebenjob', 'Geschenkt bekommen', 'Sonstiges']
+const expenseCategories = [
+  'Einkauf',
+  'Essen gehen',
+  'Klamotten',
+  'Spaß/Freizeit',
+  'Geschenke',
+  'Sonstiges',
+]
+
+// Wenn sich der Typ ändert, setzen wir die Kategorie auf einen sinnvollen Standard zurück
+watch(newType, (currentType) => {
+  newCategory.value = 'Sonstiges'
+})
 
 const addTransaction = async () => {
   if (newAmount.value === null || newAmount.value <= 0) return
@@ -15,27 +32,22 @@ const addTransaction = async () => {
   try {
     const response = await fetch('https://finanztracker-backend.onrender.com/transactions', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         amount: finalAmount,
-        date: new Date().toISOString().split('T')[0]
-      })
+        category: newCategory.value, // Kategorie mitsenden!
+        date: new Date().toISOString().split('T')[0],
+      }),
     })
 
     if (response.ok) {
-
-      alert('Eintrag erfolgreich in der PostgreSQL-Datenbank gespeichert!')
-
+      alert('Eintrag erfolgreich mit Kategorie gespeichert!')
       newAmount.value = null
-      newType.value = 'revenue'
     } else {
-      alert('Das Backend hat geantwortet, aber das Speichern schlug fehl (Status: ' + response.status + ').')
+      alert('Fehler beim Speichern.')
     }
   } catch (error) {
     console.error('Netzwerkfehler:', error)
-    alert('Verbindung zum Backend fehlgeschlagen. Läuft dein Render-Server?')
   }
 }
 </script>
@@ -62,6 +74,28 @@ const addTransaction = async () => {
         <select id="type" v-model="newType">
           <option value="revenue">Einnahme (+)</option>
           <option value="expense">Ausgabe (-)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="category">Kategorie</label>
+        <select id="category" v-model="newCategory">
+          <option
+            v-if="newType === 'revenue'"
+            v-for="cat in incomeCategories"
+            :key="cat"
+            :value="cat"
+          >
+            {{ cat }}
+          </option>
+          <option
+            v-if="newType === 'expense'"
+            v-for="cat in expenseCategories"
+            :key="cat"
+            :value="cat"
+          >
+            {{ cat }}
+          </option>
         </select>
       </div>
 

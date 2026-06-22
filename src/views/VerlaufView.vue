@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 
 interface Transaction {
   amount: number
+  date: string
   category: string
 }
 
@@ -17,16 +18,6 @@ const loadTransactions = async () => {
   }
 }
 
-// Berechnet die Gesamtsummen pro Kategorie
-const categoryTotals = computed(() => {
-  const totals: Record<string, number> = {}
-  entities.value.forEach((item) => {
-    const cat = item.category || 'Sonstiges'
-    totals[cat] = (totals[cat] || 0) + item.amount
-  })
-  return totals
-})
-
 onMounted(() => {
   loadTransactions()
 })
@@ -35,17 +26,20 @@ onMounted(() => {
 <template>
   <div class="page-container">
     <section class="list-section">
-      <h3 class="section-title">Kategorie-Übersicht</h3>
+      <h3 class="section-title">Genereller Verlauf</h3>
 
       <ul class="transaction-list">
         <li
-          v-for="(total, category) in categoryTotals"
-          :key="category"
+          v-for="(entity, index) in entities"
+          :key="index"
           class="transaction-item"
-          :class="total >= 0 ? 'revenue' : 'expense'"
+          :class="entity.amount >= 0 ? 'revenue' : 'expense'"
         >
-          <span class="category-name">{{ category }}</span>
-          <span class="amount">{{ total.toFixed(2) }} €</span>
+          <div class="meta-info">
+            <span class="date">{{ entity.date }}</span>
+            <span class="category-tag">{{ entity.category || 'Sonstiges' }}</span>
+          </div>
+          <span class="amount">{{ entity.amount.toFixed(2) }} €</span>
         </li>
       </ul>
     </section>
@@ -86,9 +80,18 @@ onMounted(() => {
   border-radius: 0 6px 6px 0;
   font-size: 1.1rem;
 }
-.category-name {
-  font-weight: 600;
-  color: #2c3e50;
+.meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.date {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+.category-tag {
+  font-weight: bold;
+  color: #34495e;
 }
 .transaction-item.revenue {
   border-left-color: #2ecc71;
