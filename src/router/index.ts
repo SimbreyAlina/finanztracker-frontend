@@ -11,9 +11,14 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/verlauf',
+      name: 'verlauf',
+      component: () => import('../views/VerlaufView.vue'), // <- Komma hiernach nicht vergessen!
+    },
+    {
       path: '/transactions',
       name: 'transactions',
-      component: TransactionsView,
+      component: () => import('../views/TransactionsView.vue'),
     },
   ],
 })
