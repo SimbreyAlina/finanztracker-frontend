@@ -10,6 +10,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/" class="nav-link">Home</RouterLink>
       <RouterLink to="/verlauf" class="nav-link">Verlauf</RouterLink>
       <RouterLink to="/transactions" class="nav-link">Einnahmen & Ausgaben</RouterLink>
+      <RouterLink to="/categories" class="nav-link">Kategorien</RouterLink>
     </nav>
 
     <main class="content-area">
