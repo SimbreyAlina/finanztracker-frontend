@@ -30,6 +30,16 @@ const updateDropdown = () => {
   if (filteredCategories.value.includes('Sonstiges')) {
     newCategory.value = 'Sonstiges'
   } else if (filteredCategories.value.length > 0) {
+    // 💡 Das "?? ''" sagt TypeScript: Wenn der Wert undefined ist, nimm stattdessen einen leeren String!
+    newCategory.value = filteredCategories.value[0] ?? ''
+  } else {
+    newCategory.value = ''
+  }
+}
+  // Setzt 'Sonstiges' als Standard voraus, falls es existiert
+  if (filteredCategories.value.includes('Sonstiges')) {
+    newCategory.value = 'Sonstiges'
+  } else if (filteredCategories.value.length > 0) {
     newCategory.value = filteredCategories.value[0]
   } else {
     newCategory.value = ''
@@ -78,7 +88,14 @@ onMounted(loadCategories)
     <form @submit.prevent="addTransaction" class="transaction-form">
       <div class="input-group">
         <label for="amount">Betrag (€)</label>
-        <input id="amount" type="number" step="0.01" v-model="newAmount" placeholder="z.B. 50.00" required />
+        <input
+          id="amount"
+          type="number"
+          step="0.01"
+          v-model="newAmount"
+          placeholder="z.B. 50.00"
+          required
+        />
       </div>
 
       <div class="input-group">
@@ -97,8 +114,16 @@ onMounted(loadCategories)
       </div>
 
       <div class="input-group">
-        <label for="comment">Kommentar <span class="optional-hint">(optional, max. 20 Z.)</span></label>
-        <input id="comment" type="text" v-model="newComment" maxlength="20" placeholder="z.B. REWE, Kino..." />
+        <label for="comment"
+          >Kommentar <span class="optional-hint">(optional, max. 20 Z.)</span></label
+        >
+        <input
+          id="comment"
+          type="text"
+          v-model="newComment"
+          maxlength="20"
+          placeholder="z.B. REWE, Kino..."
+        />
       </div>
 
       <button type="submit" class="btn-submit">Hinzufügen</button>
@@ -107,13 +132,62 @@ onMounted(loadCategories)
 </template>
 
 <style scoped>
-.page-container { padding: 1rem; background: white; border-radius: 8px; }
-.section-title { color: #000000; margin-top: 0; margin-bottom: 1.5rem; font-size: 1.3rem; border-bottom: 2px solid #ecf0f1; padding-bottom: 0.5rem; }
-.transaction-form { display: flex; flex-direction: column; gap: 1.2rem; max-width: 350px; }
-.input-group { display: flex; flex-direction: column; gap: 0.4rem; }
-.input-group label { font-weight: bold; color: #333333; font-size: 0.95rem; }
-.optional-hint { font-weight: normal; color: #7f8c8d; font-size: 0.8rem; }
-.input-group input, .input-group select { padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; color: #000000; background-color: #ffffff; }
-.btn-submit { background-color: #3498db; color: white; border: none; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: bold; border-radius: 4px; cursor: pointer; transition: background 0.2s; align-self: flex-start; }
-.btn-submit:hover { background-color: #2980b9; }
+.page-container {
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+}
+.section-title {
+  color: #000000;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 0.5rem;
+}
+.transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 350px;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.input-group label {
+  font-weight: bold;
+  color: #333333;
+  font-size: 0.95rem;
+}
+.optional-hint {
+  font-weight: normal;
+  color: #7f8c8d;
+  font-size: 0.8rem;
+}
+.input-group input,
+.input-group select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #000000;
+  background-color: #ffffff;
+}
+.btn-submit {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+.btn-submit:hover {
+  background-color: #2980b9;
+}
 </style>
