@@ -16,31 +16,21 @@ const loadCategories = async () => {
     allCategories.value = await res.json()
     updateDropdown()
   } catch (error) {
-    console.error("Fehler beim Laden der Kategorien:", error)
+    console.error('Fehler beim Laden der Kategorien:', error)
   }
 }
 
 const updateDropdown = () => {
   // Filtert die Kategorien passend zum aktuellen Typ (Einnahme/Ausgabe)
   filteredCategories.value = allCategories.value
-    .filter(c => c.type === newType.value)
-    .map(c => c.name)
+    .filter((c) => c.type === newType.value)
+    .map((c) => c.name)
 
   // Setzt 'Sonstiges' als Standard voraus, falls es existiert
   if (filteredCategories.value.includes('Sonstiges')) {
     newCategory.value = 'Sonstiges'
   } else if (filteredCategories.value.length > 0) {
-    // 💡 Das "?? ''" sagt TypeScript: Wenn der Wert undefined ist, nimm stattdessen einen leeren String!
     newCategory.value = filteredCategories.value[0] ?? ''
-  } else {
-    newCategory.value = ''
-  }
-}
-  // Setzt 'Sonstiges' als Standard voraus, falls es existiert
-  if (filteredCategories.value.includes('Sonstiges')) {
-    newCategory.value = 'Sonstiges'
-  } else if (filteredCategories.value.length > 0) {
-    newCategory.value = filteredCategories.value[0]
   } else {
     newCategory.value = ''
   }
@@ -52,7 +42,7 @@ watch(newType, updateDropdown)
 const addTransaction = async () => {
   if (newAmount.value === null || newAmount.value <= 0) return
 
-  let finalAmount = (newType.value === 'expense') ? -Math.abs(newAmount.value) : newAmount.value
+  let finalAmount = newType.value === 'expense' ? -Math.abs(newAmount.value) : newAmount.value
 
   try {
     const response = await fetch('https://finanztracker-backend.onrender.com/transactions', {
@@ -62,8 +52,8 @@ const addTransaction = async () => {
         amount: finalAmount,
         category: newCategory.value,
         comment: newComment.value,
-        date: new Date().toISOString().split('T')[0]
-      })
+        date: new Date().toISOString().split('T')[0],
+      }),
     })
 
     if (response.ok) {
