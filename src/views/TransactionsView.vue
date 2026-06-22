@@ -4,8 +4,8 @@ import { ref, watch } from 'vue'
 const newAmount = ref<number | null>(null)
 const newType = ref<string>('revenue')
 const newCategory = ref<string>('Sonstiges')
+const newComment = ref<string>('') // Neu: Zustand für den Kommentar
 
-// Dynamische Kategorien je nach Typ
 const incomeCategories = ['Job', 'Nebenjob', 'Geschenkt bekommen', 'Sonstiges']
 const expenseCategories = [
   'Einkauf',
@@ -16,8 +16,7 @@ const expenseCategories = [
   'Sonstiges',
 ]
 
-// Wenn sich der Typ ändert, setzen wir die Kategorie auf einen sinnvollen Standard zurück
-watch(newType, (currentType) => {
+watch(newType, () => {
   newCategory.value = 'Sonstiges'
 })
 
@@ -35,14 +34,16 @@ const addTransaction = async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         amount: finalAmount,
-        category: newCategory.value, // Kategorie mitsenden!
+        category: newCategory.value,
+        comment: newComment.value, // Neu: Kommentar mitsenden
         date: new Date().toISOString().split('T')[0],
       }),
     })
 
     if (response.ok) {
-      alert('Eintrag erfolgreich mit Kategorie gespeichert!')
+      alert('Eintrag erfolgreich gespeichert!')
       newAmount.value = null
+      newComment.value = '' // Feld leeren
     } else {
       alert('Fehler beim Speichern.')
     }
@@ -99,6 +100,19 @@ const addTransaction = async () => {
         </select>
       </div>
 
+      <div class="input-group">
+        <label for="comment"
+          >Kommentar <span class="optional-hint">(optional, max. 20 Z.)</span></label
+        >
+        <input
+          id="comment"
+          type="text"
+          v-model="newComment"
+          maxlength="20"
+          placeholder="z.B. REWE, Kino..."
+        />
+      </div>
+
       <button type="submit" class="btn-submit">Hinzufügen</button>
     </form>
   </div>
@@ -133,6 +147,11 @@ const addTransaction = async () => {
   font-weight: bold;
   color: #333333;
   font-size: 0.95rem;
+}
+.optional-hint {
+  font-weight: normal;
+  color: #7f8c8d;
+  font-size: 0.8rem;
 }
 .input-group input,
 .input-group select {
