@@ -1,5 +1,28 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { ref, onMounted, watch } from 'vue'
+import { useAuth } from '@okta/okta-vue'
+
+const $auth = useAuth()
+const $route = useRoute()
+const authenticated = ref(false)
+const userEmail = ref('')
+
+async function checkAuth() {
+  authenticated.value = await $auth.isAuthenticated()
+  userEmail.value = authenticated.value ? ((await $auth.getUser()).email ?? '') : ''
+}
+
+async function logout() {
+  await $auth.signOut()
+}
+
+watch(() => $route.path, checkAuth)
+
+onMounted(async () => {
+  await checkAuth()
+  $auth.authStateManager.subscribe(checkAuth)
+})
 </script>
 
 <template>
@@ -11,6 +34,8 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/verlauf" class="nav-link">Verlauf</RouterLink>
       <RouterLink to="/transactions" class="nav-link">Einnahmen & Ausgaben</RouterLink>
       <RouterLink to="/categories" class="nav-link">Kategorien</RouterLink>
+      <span v-if="authenticated" class="nav-user">{{ userEmail }}</span>
+      <a v-if="authenticated" class="nav-link nav-logout" @click="logout">Logout</a>
     </nav>
 
     <main class="content-area">
