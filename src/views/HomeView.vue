@@ -104,4 +104,19 @@ onMounted(() => {
   color: #c0392b;
   font-weight: bold;
 }
+/* Dark Mode */
+.dark-mode .page-container {
+  background: #1e1e1e;
+}
+.dark-mode .section-title {
+  color: #ffffff;
+  border-bottom-color: #333;
+}
+.dark-mode .transaction-item {
+  background-color: #2a2a2a;
+  border-bottom-color: #333;
+}
+.dark-mode .category-name {
+  color: #ecf0f1;
+}
 </style>

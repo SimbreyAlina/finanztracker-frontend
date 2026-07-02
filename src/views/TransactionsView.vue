@@ -180,4 +180,24 @@ onMounted(loadCategories)
 .btn-submit:hover {
   background-color: #2980b9;
 }
+/* Dark Mode */
+.dark-mode .page-container {
+  background: #1e1e1e;
+}
+.dark-mode .section-title {
+  color: #ffffff;
+  border-bottom-color: #333;
+}
+.dark-mode .input-group label {
+  color: #ecf0f1;
+}
+.dark-mode .optional-hint {
+  color: #a0a0a0;
+}
+.dark-mode .input-group input,
+.dark-mode .input-group select {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border-color: #444;
+}
 </style>

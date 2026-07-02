@@ -162,4 +162,23 @@ h4 {
   border-bottom: 2px solid #eee;
   padding-bottom: 5px;
 }
+/* Dark Mode */
+.dark-mode .section-title {
+  color: #ffffff;
+}
+.dark-mode input,
+.dark-mode .type-select {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border-color: #444;
+}
+.dark-mode li {
+  background: #2a2a2a;
+  color: #ffffff;
+  border-left-color: #3498db;
+}
+.dark-mode h4 {
+  color: #ffffff;
+  border-bottom-color: #333;
+}
 </style>

@@ -176,4 +176,35 @@ onMounted(() => {
   padding: 2rem 0;
   font-style: italic;
 }
+/* Dark Mode */
+.dark-mode .page-container {
+  background: #1e1e1e;
+}
+.dark-mode .section-title {
+  color: #ffffff;
+  border-bottom-color: #333;
+}
+.dark-mode .search-input {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border-color: #444;
+}
+.dark-mode .search-input:focus {
+  background-color: #333;
+  border-color: #3498db;
+}
+.dark-mode .transaction-item {
+  background-color: #2a2a2a;
+  border-bottom-color: #333;
+}
+.dark-mode .date,
+.dark-mode .no-results {
+  color: #a0a0a0;
+}
+.dark-mode .category-tag {
+  color: #ecf0f1;
+}
+.dark-mode .comment-text {
+  color: #b0b0b0;
+}
 </style>
